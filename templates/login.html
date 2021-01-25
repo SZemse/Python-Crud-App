@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+  </head>
+  <body class="bg-info">
+
+    {%with messages = get_flashed_messages(with_categories="true")%}
+    {%if messages%}
+    {%for category,message in messages%}
+    {%if category == "success"%}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">x</span>
+        </button>
+        {{message}}
+    </div>
+    {%else%}
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+          <span aria-hidden="true">x</span>
+      </button>
+      {{message}}
+  </div>
+  {%endif%}
+    
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+    <div class="container">
+      <!-- Login Form Start -->
+      <div class="row justify-content-center wrapper" id="login-box">
+        <div class="col-lg-10 my-auto myShadow">
+          <div class="row">
+            <div class="col-lg-7 bg-white p-4">
+              <h1 class="text-center font-weight-bold text-primary">login</h1>
+              <hr class="my-3" />
+              <form action="{{url_for('userAuthenticate')}}" method="post" class="px-3" id="login-form">
+                <div class="input-group input-group-lg form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="far fa-envelope fa-lg fa-fw"></i></span>
+                  </div>
+                  <input type="text" id="username" name="username" class="form-control rounded-0" placeholder="Username" required />
+                </div>
+                <div class="input-group input-group-lg form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="fas fa-key fa-lg fa-fw"></i></span>
+                  </div>
+                  <input type="password" id="password" name="password" class="form-control rounded-0" minlength="5" placeholder="Password" required autocomplete="off" />
+                </div>
+                
+                <div class="form-group">
+                  <input type="submit" id="login-btn" value="Sign In" class="btn btn-primary btn-lg btn-block myBtn" />
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-5 d-flex flex-column justify-content-center myColor p-4">
+              <h1 class="text-left font-weight-bold text-white">Dispur Wireless:Tariff Management Portal!</h1>
+              <hr class="my-3 bg-light myHr" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Login Form End -->
+      <!-- Forgot Password Form Start -->
+      <div class="row justify-content-center wrapper" id="forgot-box" style="display: none;">
+        <div class="col-lg-10 my-auto myShadow">
+          <div class="row">
+            <div class="col-lg-7 bg-white p-4">
+              <h1 class="text-center font-weight-bold text-primary">Forgot Your Password?</h1>
+              <hr class="my-3" />
+              <p class="lead text-center text-secondary">To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
+              <form action="#" method="post" class="px-3" id="forgot-form">
+                <div id="forgotAlert"></div>
+                <div class="input-group input-group-lg form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="far fa-envelope fa-lg"></i></span>
+                  </div>
+                  <input type="email" id="femail" name="email" class="form-control rounded-0" placeholder="E-Mail" required />
+                </div>
+                <div class="form-group">
+                  <input type="submit" id="forgot-btn" value="Reset Password" class="btn btn-primary btn-lg btn-block myBtn" />
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-5 d-flex flex-column justify-content-center myColor p-4">
+              <h1 class="text-center font-weight-bold text-white">Reset Password!</h1>
+              <hr class="my-4 bg-light myHr" />
+              <button class="btn btn-outline-light btn-lg font-weight-bolder myLinkBtn align-self-center" id="back-link">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Forgot Password Form End -->
+    </div>
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

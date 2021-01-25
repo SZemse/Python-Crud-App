@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+      <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>{{title}}</title>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+         
+         <style>
+
+body {
+    width: 100vw;
+    background-color: #fff;
+    margin: 0;
+    font-family: helvetica;
+ }
+ 
+ 
+ .content {
+    max-width: 1024px;
+    width: 100%;
+    padding: 0 4%;
+    padding-top: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ 
+ @media screen and (max-width: 767px) {
+    .content {
+       padding-top: 300px;
+       flex-direction: column;
+    }
+ }
+ 
+ .card {
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px;
+    height: 250px;
+    background-color: #292929;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+    border: 2px solid rgba(7, 7, 7, 0.12);
+    font-size: 16px;   
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s ease;
+ }
+ 
+ .icon {
+    margin: 0 auto;
+    width: 100%;
+    height: 80px;
+    max-width:80px;
+    background: linear-gradient(90deg, #FF7E7E 0%, #FF4848 40%, rgba(0, 0, 0, 0.28) 60%);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all 0.8s ease;
+    background-position: 0px;
+    background-size: 200px;
+ }
+ 
+
+ .material-icons.md-36 { font-size: 36px; }
+
+ 
+ .card .title {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+ }
+ 
+ .card .text {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    font-weight: 200;
+    letter-spacing: 2px;
+    opacity: 0;
+    max-height:0;
+    transition: all 0.3s ease;
+ }
+ 
+ .card:hover {
+    height: 270px;
+ }
+ 
+ .card:hover .info {
+    height: 90%;
+ }
+ 
+ .card:hover .text {
+    transition: all 0.3s ease;
+    opacity: 1;
+    max-height:40px;
+ }
+ 
+ .card:hover .icon {
+    background-position: -120px;
+    transition: all 0.3s ease;
+ }
+ 
+ .card:hover .icon i {
+    background: linear-gradient(90deg, #FF7E7E, #FF4848);
+    -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+    opacity: 1;
+    transition: all 0.3s ease;
+ }
+
+
+
+
+
+         </style>
+
+
+
+
+
+
+      </head>
+      <body>
+
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+         
+         {%with messages = get_flashed_messages(with_categories="true")%}
+         {%if messages%}
+         {%for category,message in messages%}
+         {%if category == "success"%}
+     
+         <div class="alert alert-success alert-dismissable" role="alert">
+             <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                 <span aria-hidden="true">x</span>
+             </button>
+             {{message}}
+         </div>
+         {%else%}
+         <div class="alert alert-danger alert-dismissable" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="close">
+               <span aria-hidden="true">x</span>
+           </button>
+           {{message}}
+       </div>
+       {%endif%}
+         
+         {%endfor%}
+         {%endif%}
+         {%endwith%}
+
+
+ 
+         <h1 style="color:black; font-family:system-ui; text-align: center ;font-size: 80px;"> Dispur Wireless: Tariff Plan</h1>
+         <a href="{{url_for('logout')}}"><button type="button" class="btn btn-primary btn-sm " style="border-radius: 50%;padding:10px;position: absolute;right: 0; margin-right:10px;">
+             <i class="fa fa-sign-out" aria-hidden="true"></i>  Logout </button></a>
+
+         
+
+
+
+
+               <h4>Welcome, {{user.title()}} </h4>
+                  <div class="content">
+                     <!-- card -->
+                    <h1>Voice Plan</h1>
+                     
+
+                     <div class="row">
+                     
+                     {% for row in Plan %}
+                     {% if row.2 == "Voice"%}
+                     <div class="col-lg-4 col-md-6">
+
+                     <div class="card">
+                        
+                           <div class="icon"><i class="material-icons md-36">mobile_friendly</i></div>
+                           <p class="title">{{row.1}}</p>
+                           <p class="text">
+                              Plan type: {{row.2}}<br>
+                              Tarrif: {{row.3}}<br>
+                              Validity: {{row.4}}<br>
+                              Rental: {{row.5}}</p>
+                        
+                     </div>
+
+                  </div>
+                        
+                     <!-- end card -->
+                     <!-- card -->
+                     {% endif %}
+                     {% endfor  %}
+                  
+               </div>
+
+         
+            
+                   </div>
+
+
+
+
+                   
+                  <div class="content">
+                     <!-- card -->
+                    
+                     <h1>Data Plan</h1>
+
+                     <div class="row">
+                     
+                     {% for row in Plan %}
+
+                     {% if row.2 == "Data"%}
+                     <div class="col-lg-4 col-md-6">
+
+                     <div class="card">
+                        
+                           <div class="icon"><i class="material-icons md-36">mobile_friendly</i></div>
+                           <p class="title">{{row.1}}</p>
+                           <p class="text">
+                              Plan type: {{row.2}}<br>
+                              Tarrif: {{row.3}}<br>
+                              Validity: {{row.4}}<br>
+                              Rental: {{row.5}}</p>
+                        
+                     </div>
+
+                  </div>
+                        
+                     <!-- end card -->
+                     <!-- card -->
+                     {% endif %}
+                     {% endfor  %}
+
+                     </div>
+
+                  </div>
+
+                   
+
+
+
+
+      </body>
+
+                               <!-- jQuery CDN -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js') }}"></script>
+
+
+
+</html>
